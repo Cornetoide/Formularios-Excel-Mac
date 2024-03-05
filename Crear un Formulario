@@ -1,0 +1,132 @@
+Option Explicit
+
+Sub crearformulario()
+
+Dim UserForm1 As Object
+Dim CommandButton1 As Msforms.CommandButton
+Dim TextBox1 As Msforms.TextBox
+Dim TextBox2 As Msforms.TextBox
+Dim TextBox3 As Msforms.TextBox
+Dim Label1 As Msforms.Label
+Dim Label2 As Msforms.Label
+Dim Label3 As Msforms.Label
+Dim FormName As String
+
+Dim MyComboBox As Msforms.ComboBox
+
+Application.VBE.MainWindow.Visible = False
+Application.ScreenUpdating = False
+
+Set UserForm1 = ThisWorkbook.VBProject.VBComponents.Add(vbext_ct_MSForm)
+
+With UserForm1
+    .Properties("Caption") = "Ingresar Comic"
+    .Properties("Width") = 320
+    .Properties("Height") = 180
+End With
+
+FormName = UserForm1.Name
+
+    Set CommandButton1 = UserForm1.Designer.Controls.Add("forms.CommandButton.1")
+    Set TextBox1 = UserForm1.Designer.Controls.Add("forms.TextBox.1")
+    Set TextBox2 = UserForm1.Designer.Controls.Add("forms.TextBox.1")
+    Set TextBox3 = UserForm1.Designer.Controls.Add("forms.TextBox.1")
+    
+    Set Label1 = UserForm1.Designer.Controls.Add("forms.Label.1")
+    Set Label2 = UserForm1.Designer.Controls.Add("forms.Label.1")
+    Set Label3 = UserForm1.Designer.Controls.Add("forms.Label.1")
+
+    
+    
+    
+With TextBox1
+    .Left = 100
+    .Top = 25
+    .Width = 200
+End With
+
+With TextBox2
+    .Left = 100
+    .Top = 54
+    .Width = 200
+End With
+    
+With TextBox3
+    .Left = 100
+    .Top = 85
+    .Width = 200
+End With
+
+
+    
+    
+With Label1
+    .Caption = "Nombre del Comic:"
+    .Left = 11
+    .Top = 30
+    .Width = 85
+    .Font.Bold = True
+End With
+
+With Label2
+    .Caption = "Serie:"
+    .Left = 67
+    .Top = 61
+    .Width = 30
+    .Font.Bold = True
+End With
+
+With Label3
+    .Caption = "Número:"
+    .Left = 55
+    .Top = 90
+    .Width = 38
+    .Font.Bold = True
+End With
+
+    
+    
+With CommandButton1
+    .Caption = "Registrar Comic"
+    .Left = 175
+    .Top = 117
+    .Font.Size = 12
+    .Font.Bold = True
+    .MousePointer = fmMousePointerSizeAll
+    .BackColor = vbBlue
+End With
+
+
+  
+    Set MyComboBox = UserForm1.Designer.Controls.Add("Forms.ComboBox.1")
+    
+    With MyComboBox
+        .Name = "Combo1"
+        .Left = 100
+        .Top = 55
+        .Height = 20
+        .Width = 200
+    End With
+
+    With UserForm1.CodeModule
+        .InsertLines .CountOfLines + 1, "Sub CommandButton1_Click()"
+        .InsertLines .CountOfLines + 1, "    MsgBox ""Hello!"""
+        .InsertLines .CountOfLines + 1, "    Unload Me"
+        .InsertLines .CountOfLines + 1, "End Sub"
+        .InsertLines .CountOfLines + 1, ""
+        .InsertLines .CountOfLines + 1, "Sub CommandButton1_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)"
+        .InsertLines .CountOfLines + 1, "    CommandButton1.ForeColor = vbRed"
+        .InsertLines .CountOfLines + 1, "End Sub"
+        .InsertLines .CountOfLines + 1, ""
+        .InsertLines .CountOfLines + 1, "Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)"
+        .InsertLines .CountOfLines + 1, "    CommandButton1.ForeColor = vbBlack"
+        .InsertLines .CountOfLines + 1, "End Sub"
+        .InsertLines .CountOfLines + 1, ""
+    End With
+
+
+
+VBA.UserForms.Add(FormName).Show
+
+
+End Sub
