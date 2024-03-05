@@ -1,0 +1,46 @@
+Sub CommandButton1_Click()
+    MsgBox "Hello!"
+    Unload Me
+    
+Dim Rango As Excel.Range
+Dim Final As Long
+
+    Set Rango = Hoja1.Range("A1")
+    
+Final = Rango.CurrentRegion.Rows.Count + 1
+
+Hoja1.Cells(Final, 1) = TextBox1.Value
+Hoja1.Cells(Final, 2) = TextBox2.Value
+Hoja1.Cells(Final, 3) = TextBox3.Value
+    
+    
+End Sub
+
+Sub CommandButton1_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+    CommandButton1.ForeColor = vbRed
+End Sub
+
+Sub UserForm_MouseMove(ByVal Button As Integer, ByVal Shift As Integer, ByVal x As Single, ByVal y As Single)
+    CommandButton1.ForeColor = vbBlack
+End Sub
+
+
+Private Sub Combo1_Click()
+TextBox2.Value = Combo1.Column(0)
+End Sub
+
+Private Sub UserForm_Initialize()
+  #If Mac Then
+    ResizeUserForm Me
+  #End If
+  
+  
+  Dim aCell As Range
+
+For Each aCell In Range("[Libro5.xlsm]Hoja2!A1:A5")
+
+Combo1.AddItem (aCell.Value)
+Next
+
+End Sub
+
